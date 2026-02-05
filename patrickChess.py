@@ -8,25 +8,40 @@ class bitBoard:
     wN = np.uint64(0x4200000000000000)
     wB = np.uint64(0x2400000000000000)
     wQ = np.uint64(0x1000000000000000)
-    wK = np.uint64(0x8000000000000000)
+    wK = np.uint64(0x0800000000000000)
 
     bP = np.uint64(0x000000000000FF00)
     bR = np.uint64(0x0000000000000081)
     bN = np.uint64(0x0000000000000042)
     bB = np.uint64(0x0000000000000024)
-    bQ = np.uint64(0x0000000000000001)
-    bK = np.uint64(0x8000000000000000)
+    bQ = np.uint64(0x0000000000000010)
+    bK = np.uint64(0x1000000000000000)
+
+def moveBit(bitBoard, fromBit, toBit):
+    LSB = np.uint64(0x0000000000000001)
+    newBoard = np.bitwise_or(bitBoard, np.left_shift(LSB, toBit))
+    newBoard = np.bitwise_xor(newBoard, np.left_shift(LSB, fromBit))
 
 def makeMove(piece, startSq, endSq):
     match piece:
         case "wP":
-            bitBoard.wP = 
+            bitBoard.wP = moveBit(bitBoard.wP, startSq, endSq)
+        case "wR":
+            bitBoard.wR = moveBit(bitBoard.wR, startSq, endSq)
 
 def printBitBoard(bitBoard):
     bstring = (bin(bitBoard)[2:].zfill(64))
     bstring = bstring.replace("0",".")
     bstring = textwrap.wrap(bstring, 8)
-    print(bstring)
+    for rank in reversed(bstring):
+        print(rank)
+
+def notationConverter(notation):
+    letters = {"A": 1,"B": 2,"C": 3,"D": 4,"E": 5,"F": 6,"G": 7,"H": 8}
+    for letters in notation:
+        notation.replace(letter,letters.get(letter))
+
+    if notation
 
 #----start of main---
-printBitBoard(bitBoard.wP)
+notationConverter(n4)
