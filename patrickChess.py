@@ -17,12 +17,16 @@ class bitBoard:
     bQ = np.uint64(0x0000000000000001)
     bK = np.uint64(0x8000000000000000)
 
+def makeMove(piece, startSq, endSq):
+    match piece:
+        case "wP":
+            bitBoard.wP = 
 
 def printBitBoard(bitBoard):
     bstring = (bin(bitBoard)[2:].zfill(64))
     bstring = bstring.replace("0",".")
+    bstring = textwrap.wrap(bstring, 8)
     print(bstring)
-    
-    
-    
+
+#----start of main---
 printBitBoard(bitBoard.wP)
